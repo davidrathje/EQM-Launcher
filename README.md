@@ -25,6 +25,16 @@ files.
 
 The launcher keeps itself and the client up to date: when a new version is out it updates on the next start.
 
+## Android
+
+1. On the phone, open [Releases](https://github.com/davidrathje/EQM-Launcher/releases) and download
+   `EQM-<version>-android.apk` from the latest **EQM for Android** release.
+2. Open the file and install it. Android asks once to allow **Install unknown apps** for your browser.
+3. Get the beta key and the game files onto the phone with the Windows launcher's **Transfer to phone**.
+
+The app updates itself: when a new version is out it shows a banner, downloads the new APK from this repository, checks it
+and opens Android's installer. Android asks once to allow **Install unknown apps** for EQM.
+
 ## The game in short
 
 | | |
@@ -47,7 +57,7 @@ The launcher keeps itself and the client up to date: when a new version is out i
 ## Fair play
 
 The EQM client only runs from its own packed files, refuses injected DLLs and changed files, and reports its integrity to
-the server. Modified clients cannot join.
+the server on every zone entry.
 
 ## Problems
 
