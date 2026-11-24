@@ -3,23 +3,23 @@
   "enabled": true,
   "minVersions": {},
   "message": "",
-  "issued": "2026-11-24T12:47:37Z",
-  "seq": 5,
+  "issued": "2026-11-24T15:30:26Z",
+  "seq": 6,
   "assets": {
     "launcher-windows-x64": {
-      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/v0.1.4/EQM-Launcher-0.1.4-windows-x64-setup.exe",
-      "sha256": "e962e4030e73ad96d664420c77301293e9c229ed31f0a1124dbc8f4ed8b9daa6",
-      "size": 48111524
+      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/v0.1.5/EQM-Launcher-0.1.5-windows-x64-setup.exe",
+      "sha256": "1379ad49c9be03f74be32bd65976f182805e079d15d49cc3d942a0c7a8c345ce",
+      "size": 48117941
     },
     "android": {
-      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/android-v0.1.4/EQM-0.1.4-android.apk",
-      "sha256": "4a1e4edf2ba5dd372448de6ea06ef295fe900eba9e552d805211cee045ebea43",
-      "size": 38924423
+      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/android-v0.1.5/EQM-0.1.5-android.apk",
+      "sha256": "6b57fef61bb5251d6d4d168dae443f8f6fcd1fc457e8fb5a3414b47b8db09474",
+      "size": 38933067
     }
   },
   "latest": {
-    "launcher": "0.1.4",
-    "client": "0.1.4"
+    "launcher": "0.1.5",
+    "client": "0.1.5"
   },
-  "notes": "EQM 0.1.4"
+  "notes": "EQM 0.1.5"
 }
