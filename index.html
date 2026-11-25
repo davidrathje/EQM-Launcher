@@ -1,0 +1,279 @@
+<title>EQM Wiki</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a reference wiki. Header with search on top, a zone/guide index on the left, the page on the right; one column on phones.
+   Items read like the game's own inspect window. */
+:root {
+  --bg: #f2f4f6; --panel: #ffffff; --fg: #1a222c; --muted: #5b6774; --line: #d3dbe3;
+  --accent: #8f5418; --accent-soft: #f3e6d6; --link: #1f5d8f; --boss: #9b2c2c; --ok: #2f6b3a;
+  --inspect-bg: #1d2530; --inspect-fg: #e6e9ee; --inspect-dim: #9aa7b6;
+  --display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11151b; --panel: #171c24; --fg: #e3e7ec; --muted: #94a0ad; --line: #29313c;
+  --accent: #d79c58; --accent-soft: #2e2418; --link: #7db7e6; --boss: #e07a7a; --ok: #7cc48a;
+  --inspect-bg: #0c1016; --inspect-fg: #e6e9ee; --inspect-dim: #8e9aa8; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11151b; --panel: #171c24; --fg: #e3e7ec; --muted: #94a0ad; --line: #29313c;
+  --accent: #d79c58; --accent-soft: #2e2418; --link: #7db7e6; --boss: #e07a7a; --ok: #7cc48a;
+  --inspect-bg: #0c1016; --inspect-fg: #e6e9ee; --inspect-dim: #8e9aa8; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 16px/1.55 var(--body) }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--panel) }
+a { color: var(--link); text-decoration: none }
+a:hover { text-decoration: underline }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--panel); border-bottom: 1px solid var(--line) }
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; max-width: 1200px; margin: 0 auto;
+  padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+.brand { font-family: var(--display); font-weight: 700; font-size: 1.35rem; letter-spacing: .06em; color: var(--fg) }
+.brand span { color: var(--accent) }
+#q { flex: 1 1 260px; min-width: 0; font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg) }
+.wrap { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 28px; max-width: 1200px; margin: 0 auto;
+  padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+nav h3 { font: 600 .72rem/1 var(--body); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 18px 0 8px }
+nav h3:first-child { margin-top: 0 }
+nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px }
+nav a { display: block; padding: 3px 8px; border-radius: 4px; color: var(--fg) }
+nav a.on { background: var(--accent-soft); color: var(--accent); font-weight: 600 }
+main { min-width: 0 }
+h1 { font: 700 2rem/1.2 var(--display); letter-spacing: .03em; margin: 0 0 4px; text-wrap: balance }
+h2 { font: 600 1.25rem/1.3 var(--display); letter-spacing: .03em; margin: 28px 0 10px; text-wrap: balance }
+h3, h4, h5 { margin: 22px 0 8px; text-wrap: balance }
+.sub { color: var(--muted); margin: 0 0 18px }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 16px }
+.chip { font-size: .78rem; font-weight: 600; letter-spacing: .04em; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted) }
+.chip.boss { color: var(--boss); border-color: currentColor }
+.chip.named { color: var(--accent); border-color: currentColor }
+.tw { overflow-x: auto; margin: 8px 0 16px }
+table { border-collapse: collapse; width: 100%; font-size: .95rem }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: top }
+th { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600 }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap }
+.lv { font-variant-numeric: tabular-nums; white-space: nowrap }
+.filters { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 4px 0 8px; color: var(--muted); font-size: .9rem }
+.filters input[type=text] { font: inherit; padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); color: var(--fg) }
+.inspect { background: var(--inspect-bg); color: var(--inspect-fg); font: 13px/1.6 var(--mono); padding: 14px 16px; border-radius: 6px;
+  max-width: 460px; white-space: pre-wrap; border: 1px solid var(--line) }
+.inspect .t { color: #f0c27a; font-weight: 600 }
+.inspect .d { color: var(--inspect-dim) }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 24px }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px }
+.card { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; color: var(--fg) }
+.card:hover { border-color: var(--accent); text-decoration: none }
+.card b { display: block; font-family: var(--display); letter-spacing: .02em }
+.card small { color: var(--muted) }
+.doc { max-width: 72ch }
+.doc table { font-size: .9rem }
+.doc code, td code { font: .85em var(--mono); background: var(--accent-soft); padding: 0 4px; border-radius: 3px }
+.doc pre { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); padding: 10px; border-radius: 6px }
+.empty { color: var(--muted); font-style: italic }
+.note { color: var(--muted); font-size: .88rem }
+@media (max-width: 760px) {
+  .wrap { grid-template-columns: minmax(0, 1fr) }
+  nav { border-bottom: 1px solid var(--line); padding-bottom: 12px }
+  nav ul { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) }
+  h1 { font-size: 1.6rem }
+}
+@media (prefers-reduced-motion: no-preference) { .card { transition: border-color .15s } }
+</style>
+
+<header><div class="bar">
+  <a class="brand" href="#home">EQM <span>Wiki</span></a>
+  <input id="q" type="search" placeholder="Search NPCs, items and zones" autocomplete="off" aria-label="Search">
+</div></header>
+<div class="wrap">
+  <nav id="nav" aria-label="Index"><p class="note">Loading the world&#8230;</p></nav>
+  <main id="main"><h1>EQM Wiki</h1><p class="sub">Loading the world data&#8230;</p></main>
+</div>
+
+<script>
+"use strict";
+let D = null;
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const zoneName = (s) => (D.zoneBy[s] ? D.zoneBy[s].n : s);
+const npcLink = (id) => { const n = D.npcs[id]; return n ? `<a href="#npc-${id}">${esc(n.n)}</a>` : "?"; };
+const itemLink = (id) => { const i = D.items[id]; return i ? `<a href="#item-${id}">${esc(i.n)}</a>` : "?"; };
+const zoneLink = (s) => `<a href="#zone-${esc(s)}">${esc(zoneName(s))}</a>`;
+const lvText = (n) => (n.mx && n.mx > n.lv ? `${n.lv}\u2013${n.mx}` : `${n.lv}`);
+const coin = (cp) => { const p = Math.floor(cp / 1000), g = Math.floor(cp / 100) % 10, s = Math.floor(cp / 10) % 10, c = cp % 10;
+  return [[p, "pp"], [g, "gp"], [s, "sp"], [c, "cp"]].filter((x) => x[0]).map((x) => x[0] + x[1]).join(" ") || "0cp"; };
+const role = (n) => (/Merchant|Banker|guildmaster/.test(n.c) ? n.c : "");
+
+function chips(n) {
+  const c = [];
+  if (n.boss) c.push('<span class="chip boss">Raid boss</span>');
+  if (n.named) c.push('<span class="chip named">Named</span>');
+  if (n.rare) c.push('<span class="chip named">Rare spawn</span>');
+  if (role(n)) c.push(`<span class="chip">${esc(role(n))}</span>`);
+  return c.length ? `<div class="chips">${c.join("")}</div>` : "";
+}
+
+function nav(active) {
+  const z = D.zones.map((x) => `<li><a href="#zone-${x.s}" class="${active === "zone-" + x.s ? "on" : ""}">${esc(x.n)}</a></li>`).join("");
+  const d = D.docs.map((x) => `<li><a href="#doc-${x.k}" class="${active === "doc-" + x.k ? "on" : ""}">${esc(x.t)}</a></li>`).join("");
+  const c = (D.classes || []).map((x) => `<li><a href="#class-${x.id}" class="${active === "class-" + x.id ? "on" : ""}">${esc(x.n)}</a></li>`).join("");
+  $("#nav").innerHTML = `<h3>Guides</h3><ul><li><a href="#home" class="${active === "home" ? "on" : ""}">Start</a></li>${d}</ul><h3>Classes</h3><ul>${c}</ul><h3>Zones</h3><ul>${z}</ul>`;
+}
+
+function classPage(id) {
+  const c = (D.classes || []).find((x) => String(x.id) === String(id));
+  if (!c) return notFound();
+  const gms = c.gm.map((n) => `<tr><td>${npcLink(n)}</td><td>${D.npcs[n].sp.map((s) => zoneLink(s.z)).join(", ")}</td></tr>`).join("");
+  const spells = c.spells.map(([lv, item]) => { const i = D.items[item];
+    return `<tr><td class="n">${lv}</td><td>${esc(i.spell)}</td><td>${itemLink(item)}</td><td class="n">${i.sold.length ? "sold" : ""}${i.sold.length && i.drop.length ? ", " : ""}${i.drop.length ? "drops" : ""}</td></tr>`; }).join("");
+  return `<h1>${esc(c.n)}</h1><p class="sub">${c.gm.length} guildmasters \u00b7 ${c.spells.length} spells in EQM</p>
+    <h2>Guildmasters</h2>${gms ? `<div class="tw"><table><thead><tr><th>Guildmaster</th><th>Zone</th></tr></thead><tbody>${gms}</tbody></table></div>` : '<p class="empty">None.</p>'}
+    <h2>Spells</h2>${spells ? `<div class="tw"><table><thead><tr><th class="n">Level</th><th>Spell</th><th>Scroll</th><th class="n">Get it</th></tr></thead><tbody>${spells}</tbody></table></div>` : '<p class="empty">This class casts no spells.</p>'}`;
+}
+
+function home() {
+  const counts = `${D.zones.length} zones \u00b7 ${Object.keys(D.npcs).length.toLocaleString()} NPCs \u00b7 ${Object.keys(D.items).length.toLocaleString()} items`;
+  const zones = D.zones.map((z) => `<a class="card" href="#zone-${z.s}"><b>${esc(z.n)}</b><small>${z.lv.length ? "Levels " + z.lv[0] + "\u2013" + z.lv[1] + " \u00b7 " : ""}${z.npcs.length} NPCs</small></a>`).join("");
+  const bosses = Object.entries(D.npcs).filter(([, n]) => n.boss).sort((a, b) => b[1].lv - a[1].lv).slice(0, 40)
+    .map(([id, n]) => `<tr><td>${npcLink(id)}</td><td class="n">${lvText(n)}</td><td>${n.sp.map((s) => zoneLink(s.z)).join(", ")}</td></tr>`).join("");
+  return `<h1>EQM Wiki</h1><p class="sub">The world of EQM as the server has it now: ${counts}. Made from the live world data, so every level, drop and price here is the one in the game.</p>
+    <h2>Zones</h2><div class="cards">${zones}</div>
+    <h2>Raid bosses</h2><div class="tw"><table><thead><tr><th>Boss</th><th class="n">Level</th><th>Zone</th></tr></thead><tbody>${bosses || '<tr><td colspan="3" class="empty">None marked.</td></tr>'}</tbody></table></div>`;
+}
+
+function zonePage(s) {
+  const z = D.zoneBy[s];
+  if (!z) return notFound();
+  const to = z.to.map((t) => (t.z ? zoneLink(t.z) : esc(t.label))).join(" \u00b7 ") || '<span class="empty">none</span>';
+  const tele = (z.tele || []).map(esc).join(" \u00b7 ");
+  // one row per name: the same creature at several levels is one entry (its link goes to the one with the most spawns here)
+  const groups = new Map();
+  for (const id of z.npcs) {
+    const n = D.npcs[id], sp = n.sp.find((x) => x.z === s) || n.sp[0], key = n.n + "|" + n.ln;
+    const g = groups.get(key) || { ids: [], lo: 999, hi: 0, spawns: 0, best: id, bestN: -1, named: false, c: n.c, ln: n.ln, n: n.n };
+    g.ids.push(id); g.lo = Math.min(g.lo, n.lv); g.hi = Math.max(g.hi, n.mx || n.lv); g.spawns += sp.n;
+    if (sp.n > g.bestN) { g.best = id; g.bestN = sp.n; g.y = sp.y; g.x = sp.x; }
+    g.named = g.named || n.named || n.boss;
+    groups.set(key, g);
+  }
+  const rows = [...groups.values()].map((g) =>
+    `<tr data-k="${esc((g.n + " " + g.ln).toLowerCase())}" data-named="${g.named ? 1 : 0}"><td>${npcLink(g.best)}${g.ln ? ` <span class="note">(${esc(g.ln)})</span>` : ""}</td>
+      <td class="n">${g.hi > g.lo ? g.lo + "\u2013" + g.hi : g.lo}</td><td>${esc(g.c)}</td><td class="n">${g.spawns}</td><td class="n">${g.ids.length > 1 ? '<span class="note">several</span>' : g.y + ", " + g.x}</td></tr>`).join("");
+  return `<h1>${esc(z.n)}</h1><p class="sub">Short name <code>${esc(z.s)}</code>${z.lv.length ? ` \u00b7 most creatures level ${z.lv[0]}\u2013${z.lv[1]}` : ""}</p>
+    <h2>Zone lines</h2><p>${to}</p>${tele ? `<h2>Teleports inside the zone</h2><p>${tele}</p>` : ""}
+    <h2>NPCs (${groups.size} kinds, ${z.npcs.length} in all)</h2>
+    <div class="filters"><label for="zf">Filter</label><input id="zf" type="text" placeholder="name">
+      <label><input id="zn" type="checkbox"> named and bosses only</label></div>
+    <div class="tw"><table id="zt"><thead><tr><th>Name</th><th class="n">Level</th><th>Class</th><th class="n">Spawns</th><th class="n">Loc (y, x)</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="note">Loc is where /loc shows it (y, x), the average of its spawn points.</p>`;
+}
+
+function npcPage(id) {
+  const n = D.npcs[id];
+  if (!n) return notFound();
+  const where = n.sp.map((s) => `<tr><td>${zoneLink(s.z)}</td><td class="n">${s.y}, ${s.x}, ${s.zz}</td><td class="n">${s.n}</td><td class="n">${s.ch}%</td></tr>`).join("");
+  const loot = n.loot.map(([i, p]) => `<tr><td>${itemLink(i)}</td><td class="n">${p / 10}%</td></tr>`).join("");
+  const sell = n.sell.map((i) => `<tr><td>${itemLink(i)}</td><td class="n">${coin(D.items[i].price)}</td></tr>`).join("");
+  const same = Object.entries(D.npcs).filter(([k, o]) => k !== String(id) && o.n === n.n)
+    .map(([k, o]) => `<a href="#npc-${k}">level ${lvText(o)}</a> in ${o.sp.map((s) => esc(zoneName(s.z))).join(", ")}`);
+  return `<h1>${esc(n.n)}</h1><p class="sub">${n.ln ? esc(n.ln) + " \u00b7 " : ""}Level ${lvText(n)}${n.c ? " " + esc(n.c) : ""}${n.hp ? " \u00b7 " + n.hp.toLocaleString() + " HP" : ""}</p>${chips(n)}
+    <h2>Where</h2><div class="tw"><table><thead><tr><th>Zone</th><th class="n">Loc (y, x, z)</th><th class="n">Spawn points</th><th class="n">Chance there</th></tr></thead><tbody>${where}</tbody></table></div>
+    ${same.length ? `<p class="note">Also ${esc(n.n)}: ${same.slice(0, 30).join(" \u00b7 ")}${same.length > 30 ? " \u2026" : ""}</p>` : ""}
+    ${(n.quest || []).length ? `<h2>Quest items</h2><p>${n.quest.map(itemLink).join(" \u00b7 ")}</p>` : ""}
+    ${sell ? `<h2>Sells (${n.sell.length})</h2><div class="tw"><table><thead><tr><th>Item</th><th class="n">Price</th></tr></thead><tbody>${sell}</tbody></table></div>` : ""}
+    <h2>Drops</h2>${loot ? `<div class="tw"><table><thead><tr><th>Item</th><th class="n">Chance per kill</th></tr></thead><tbody>${loot}</tbody></table></div><p class="note">Chance per kill is the loot table's chance times the drop's chance.</p>` : '<p class="empty">Nothing.</p>'}`;
+}
+
+function inspect(i) {
+  const L = [];
+  const flags = [i.magic && "MAGIC ITEM", i.lore && "LORE ITEM", i.nodrop && "NO DROP", i.norent && "NO RENT"].filter(Boolean).join("  ");
+  L.push(`<span class="t">${esc(i.n)}</span>`);
+  if (flags) L.push(flags);
+  if (i.slots.length) L.push("Slot: " + i.slots.map((x) => x.toUpperCase()).join(" "));
+  if (i.dmg) L.push(`Skill: ${esc(i.t)}  Atk Delay: ${i.dly}`, `DMG: ${i.dmg}`);
+  else if (i.t && i.t !== "Armor" && i.t !== "Misc") L.push("Type: " + esc(i.t));
+  if (i.ac) L.push("AC: " + i.ac);
+  const st = Object.entries(i.st).map(([k, v]) => `${k.toUpperCase()}: ${v > 0 ? "+" : ""}${v}`);
+  if (i.hp) st.unshift(`HP: ${i.hp > 0 ? "+" : ""}${i.hp}`);
+  if (i.mana) st.push(`MANA: ${i.mana > 0 ? "+" : ""}${i.mana}`);
+  if (st.length) L.push(st.join(" "));
+  if (i.spell) L.push(`Spell: ${esc(i.spell)}`);
+  if (i.bag) L.push(`Capacity: ${i.bag} slots`);
+  if (i.req) L.push(`Required level: ${i.req}`);
+  L.push(`WT: ${(i.w / 10).toFixed(1)}`);
+  if (i.cl.length) L.push("Class: " + i.cl.join(" "));
+  if (i.ra.length) L.push("Race: " + i.ra.join(" "));
+  L.push(`<span class="d">Value: ${coin(i.price)}</span>`);
+  return `<div class="inspect">${L.join("\n")}</div>`;
+}
+
+function itemPage(id) {
+  const i = D.items[id];
+  if (!i) return notFound();
+  const drop = i.drop.slice().sort((a, b) => b[1] - a[1]).map(([n, p]) => `<tr><td>${npcLink(n)}</td><td class="n">${lvText(D.npcs[n])}</td><td>${D.npcs[n].sp.map((s) => zoneLink(s.z)).join(", ")}</td><td class="n">${p / 10}%</td></tr>`).join("");
+  const sold = i.sold.map((n) => `<tr><td>${npcLink(n)}</td><td>${D.npcs[n].sp.map((s) => zoneLink(s.z)).join(", ")}</td><td class="n">${coin(i.price)}</td></tr>`).join("");
+  return `<h1>${esc(i.n)}</h1><p class="sub">${esc(i.t || "Item")}</p>${inspect(i)}
+    <h2>Dropped by</h2>${drop ? `<div class="tw"><table><thead><tr><th>NPC</th><th class="n">Level</th><th>Zone</th><th class="n">Chance</th></tr></thead><tbody>${drop}</tbody></table></div>` : '<p class="empty">No NPC in EQM drops it.</p>'}
+    ${(i.quest || []).length ? `<h2>Quests</h2><p>Part of a quest with ${i.quest.map(npcLink).join(", ")}.</p>` : ""}
+    <h2>Sold by</h2>${sold ? `<div class="tw"><table><thead><tr><th>Merchant</th><th>Zone</th><th class="n">Base price</th></tr></thead><tbody>${sold}</tbody></table></div><p class="note">Merchants add their markup to the base price.</p>` : '<p class="empty">No merchant sells it.</p>'}`;
+}
+
+function docPage(k) {
+  const d = D.docs.find((x) => x.k === k);
+  return d ? `<div class="doc">${d.h}</div>` : notFound();
+}
+
+function notFound() { return `<h1>Not found</h1><p class="sub">That page is not in the wiki. <a href="#home">Back to the start</a>.</p>`; }
+
+function search(q) {
+  q = q.trim().toLowerCase();
+  if (q.length < 2) return render();
+  const words = q.split(/\s+/);
+  const hit = (s) => words.every((w) => s.includes(w));
+  const zs = D.zones.filter((z) => hit((z.n + " " + z.s).toLowerCase())).slice(0, 20);
+  const cs = (D.classes || []).filter((c) => hit(c.n.toLowerCase()));
+  const ns = Object.entries(D.npcs).filter(([, n]) => hit((n.n + " " + n.ln).toLowerCase())).slice(0, 80);
+  const is = Object.entries(D.items).filter(([, i]) => hit(i.n.toLowerCase())).slice(0, 80);
+  const list = (rows) => rows.join("") || '<p class="empty">No match.</p>';
+  $("#main").innerHTML = `<h1>Search</h1><p class="sub">\u201c${esc(q)}\u201d</p>
+    ${cs.length ? `<h2>Classes</h2><p>${cs.map((c) => `<a href="#class-${c.id}">${esc(c.n)}</a>`).join(" \u00b7 ")}</p>` : ""}
+    ${zs.length ? `<h2>Zones</h2><p>${zs.map((z) => zoneLink(z.s)).join(" \u00b7 ")}</p>` : ""}
+    <h2>NPCs (${ns.length}${ns.length === 80 ? "+" : ""})</h2>${ns.length ? `<div class="tw"><table><thead><tr><th>Name</th><th class="n">Level</th><th>Zone</th></tr></thead><tbody>${list(ns.map(([id, n]) => `<tr><td>${npcLink(id)}</td><td class="n">${lvText(n)}</td><td>${n.sp.map((s) => zoneLink(s.z)).join(", ")}</td></tr>`))}</tbody></table></div>` : '<p class="empty">No match.</p>'}
+    <h2>Items (${is.length}${is.length === 80 ? "+" : ""})</h2>${is.length ? `<div class="tw"><table><thead><tr><th>Item</th><th>Type</th><th class="n">Drops / sold</th></tr></thead><tbody>${list(is.map(([id, i]) => `<tr><td>${itemLink(id)}</td><td>${esc(i.t)}</td><td class="n">${i.drop.length} / ${i.sold.length}</td></tr>`))}</tbody></table></div>` : '<p class="empty">No match.</p>'}`;
+}
+
+function render() {
+  const h = (location.hash || "#home").slice(1);
+  let m, html = "";
+  if (h === "home" || h === "") html = home();
+  else if ((m = h.match(/^zone-([a-z0-9]+)$/))) html = zonePage(m[1]);
+  else if ((m = h.match(/^npc-(\d+)$/))) html = npcPage(m[1]);
+  else if ((m = h.match(/^item-(\d+)$/))) html = itemPage(m[1]);
+  else if ((m = h.match(/^doc-([a-z0-9-]+)$/))) html = docPage(m[1]);
+  else if ((m = h.match(/^class-(\d+)$/))) html = classPage(m[1]);
+  else html = notFound();
+  nav(h === "" ? "home" : h);
+  $("#main").innerHTML = html;
+  window.scrollTo(0, 0);
+  const zf = $("#zf"), zn = $("#zn");
+  if (zf) {
+    const apply = () => { const v = zf.value.trim().toLowerCase(), only = zn.checked;
+      document.querySelectorAll("#zt tbody tr").forEach((tr) => { tr.hidden = (v && !tr.dataset.k.includes(v)) || (only && tr.dataset.named !== "1"); }); };
+    zf.addEventListener("input", apply); zn.addEventListener("change", apply);
+  }
+}
+
+let timer = 0;
+$("#q").addEventListener("input", (e) => { clearTimeout(timer); const v = e.target.value; timer = setTimeout(() => search(v), 150); });
+window.addEventListener("hashchange", () => { $("#q").value = ""; render(); });
+
+fetch("data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((data) => {
+  D = data;
+  D.zoneBy = Object.fromEntries(D.zones.map((z) => [z.s, z]));
+  render();
+}).catch((e) => {
+  $("#main").innerHTML = `<h1>EQM Wiki</h1><p class="sub">The world data (data.json) could not be loaded: ${esc(e.message)}. Open the wiki from its folder on a web server, or regenerate it with eqm/tools/eqm_wiki.py.</p>`;
+});
+</script>
