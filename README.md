@@ -42,12 +42,17 @@ and opens Android's installer. Android asks once to allow **Install unknown apps
 
 | | |
 |---|---|
-| Races | 9 race groups with about 4 types each, in 3 alliances; pick race, type, sex and class |
+| Races | 9 race groups with about 4 types each, in 3 alliances; pick race, type, sex and class; the bigger you are, the more you eat and drink |
 | Classes | the original 14 and the Beastlord (giants and golems), each race with its own class list; Classic to Velious spells and skills up to level 50, no AA |
-| Levels | cap 50, experience x8 |
+| Levels | cap 50, experience x8; no item or spell above level 50 |
 | PvP | free-for-all within 5 levels; the winner takes the coin and one item (never no-drop); no exp loss |
 | Groups | up to 4; the hardest bosses need 8 (two groups) |
 | World | 3 home zones with 9 cities, 3 middle zones, 3 dungeons, planes, dragon lairs and raid zones, all cut-down versions of the originals; maps on by default |
+
+## Undead types
+
+The Sarnak skeleton, the Sarnak spirit, the Spirit orc and the Spirit goblin are undead: spells and abilities against the undead
+work on them, and in return they never run out of air under water (Enduring Breath) and see in the dark (Ultravision).
 
 ## Where things live
 
