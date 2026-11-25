@@ -1,5 +1,8 @@
 # EQM
 
+**[EQM Wiki](https://davidrathje.github.io/EQM-Launcher/)**: races, classes, zones, NPCs, items, quests and guides. In the game, type `/wiki` (for example
+`/wiki ragebringer` or `/wiki monk`).
+
 EQM is a classic EverQuest PvP server (Classic to Velious) where you play the races that were only ever monsters: giants,
 golems, orcs, goblins, the rodent folk, brownies, sarnak, lizardmen and kobolds. It has its own client and launcher, and
 everything in the game is built from the original EverQuest content on your own computer.
@@ -39,8 +42,8 @@ and opens Android's installer. Android asks once to allow **Install unknown apps
 
 | | |
 |---|---|
-| Races | 9 race groups with 4 types each, in 3 alliances; pick race, type, class and sex |
-| Classes | the original 14, Classic to Velious spells and skills, no tradeskills or AA |
+| Races | 9 race groups with about 4 types each, in 3 alliances; pick race, type, sex and class |
+| Classes | the original 14 and the Beastlord (giants and golems), each race with its own class list; Classic to Velious spells and skills up to level 50, no AA |
 | Levels | cap 50, experience x8 |
 | PvP | free-for-all within 5 levels; the winner takes the coin and one item (never no-drop); no exp loss |
 | Groups | up to 4; the hardest bosses need 8 (two groups) |
@@ -58,6 +61,11 @@ and opens Android's installer. Android asks once to allow **Install unknown apps
 
 The EQM client only runs from its own packed files, refuses injected DLLs and changed files, and reports its integrity to
 the server on every zone entry.
+
+## More
+
+- [EQM Wiki](https://davidrathje.github.io/EQM-Launcher/): the whole game, searchable.
+- [Releases](https://github.com/davidrathje/EQM-Launcher/releases): the launcher, the client and the Android app, with what is new in each.
 
 ## Problems
 
