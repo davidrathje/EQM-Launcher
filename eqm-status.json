@@ -3,13 +3,13 @@
   "enabled": true,
   "minVersions": {},
   "message": "",
-  "issued": "2026-11-25T23:23:10Z",
-  "seq": 20,
+  "issued": "2026-11-27T15:37:20Z",
+  "seq": 21,
   "assets": {
     "launcher-windows-x64": {
-      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/v0.1.18/EQM-Launcher-0.1.18-windows-x64-setup.exe",
-      "sha256": "282451ff29821b175cc9c8bf10e90267f99139f85811829342a4241040669463",
-      "size": 48627776
+      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/v0.1.19/EQM-Launcher-0.1.19-windows-x64-setup.exe",
+      "sha256": "be8e1725c3c6708f55f100384147c03f7f9421560161aa7b01603a89b1551e62",
+      "size": 48782385
     },
     "android": {
       "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/android-v0.1.18/EQM-0.1.18-android.apk",
@@ -18,9 +18,9 @@
     }
   },
   "latest": {
-    "launcher": "0.1.18",
-    "client": "0.1.18"
+    "launcher": "0.1.19",
+    "client": "0.1.19"
   },
-  "notes": "EQM 0.1.18",
+  "notes": "Robes and helms fit every type, three types per race, the home zones' joins can be crossed",
   "loginHost": "2.68.127.195:5998"
 }
