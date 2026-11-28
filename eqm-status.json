@@ -3,24 +3,24 @@
   "enabled": true,
   "minVersions": {},
   "message": "",
-  "issued": "2026-11-27T16:54:16Z",
-  "seq": 22,
+  "issued": "2026-11-28T01:45:06Z",
+  "seq": 23,
   "assets": {
     "launcher-windows-x64": {
-      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/v0.1.19/EQM-Launcher-0.1.19-windows-x64-setup.exe",
-      "sha256": "be8e1725c3c6708f55f100384147c03f7f9421560161aa7b01603a89b1551e62",
-      "size": 48782385
+      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/v0.1.20/EQM-Launcher-0.1.20-windows-x64-setup.exe",
+      "sha256": "294499ba3ebef23a419980d8725aa2ddbee77d1633c6fa5b20536a32401ed6c9",
+      "size": 48781141
     },
     "android": {
-      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/android-v0.1.19/EQM-0.1.19-android.apk",
-      "sha256": "5eb1ddbc31a65bd2f2f13dc6a22433a621a9ee4560ff444900352a998845bc9a",
+      "url": "https://github.com/davidrathje/EQM-Launcher/releases/download/android-v0.1.20/EQM-0.1.20-android.apk",
+      "sha256": "94d74825244e9fea817b8d8d8bafed125ddef36a5e673b34c2ac9ded765ac9aa",
       "size": 39817495
     }
   },
   "latest": {
-    "launcher": "0.1.19",
-    "client": "0.1.19"
+    "launcher": "0.1.20",
+    "client": "0.1.20"
   },
-  "notes": "Robes and helms fit every type, three types per race, the home zones' joins can be crossed",
+  "notes": "More classes for every race group, the Beastlord in every alliance, every city trainer reachable",
   "loginHost": "2.68.127.195:5998"
 }
