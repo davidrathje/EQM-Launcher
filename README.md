@@ -42,8 +42,8 @@ and opens Android's installer. Android asks once to allow **Install unknown apps
 
 | | |
 |---|---|
-| Races | 9 race groups with about 4 types each, in 3 alliances; pick race, type, sex and class; the bigger you are, the more you eat and drink |
-| Classes | the original 14 and the Beastlord (giants and golems), each race with its own class list; Classic to Velious spells and skills up to level 50, no AA |
+| Races | 9 race groups with 3 types each, in 3 alliances; pick race, type, sex and class; the bigger you are, the more you eat and drink |
+| Classes | the original 14 and the Beastlord, each race with its own class list, every alliance with every class (the Beastlord: giants, golems, rodents, brownies, sarnak, lizardmen); Classic to Velious spells and skills up to level 50, no AA |
 | Levels | cap 50, experience x8; no item or spell above level 50 |
 | PvP | free-for-all within 5 levels; the winner takes the coin and one item (never no-drop); no exp loss |
 | Groups | up to 4; the hardest bosses need 8 (two groups) |
@@ -51,7 +51,7 @@ and opens Android's installer. Android asks once to allow **Install unknown apps
 
 ## Undead types
 
-The Sarnak skeleton, the Sarnak spirit, the Spirit orc and the Spirit goblin are undead: spells and abilities against the undead
+The Sarnak spirit, the Spirit orc and the Spirit goblin are undead: spells and abilities against the undead
 work on them, and in return they never run out of air under water (Enduring Breath) and see in the dark (Ultravision).
 
 ## Where things live
@@ -65,7 +65,7 @@ work on them, and in return they never run out of air under water (Enduring Brea
 ## Fair play
 
 The EQM client only runs from its own packed files, refuses injected DLLs and changed files, and reports its integrity to
-the server on every zone entry.
+the server on every zone entry. The server lets in only released EQM clients.
 
 ## More
 
